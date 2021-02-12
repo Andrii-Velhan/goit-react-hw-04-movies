@@ -1,0 +1,36 @@
+TO DO: 
+clone repo
+
+npx create-react-app .
+
+npm install --save-dev prettier husky lint-staged
+add 3 files to root(.huskyrc .lintstagedrc prettierrc)
+
+https://www.npmjs.com/package/modern-normalize:
+npm install modern-normalize
+
+import 'modern-normalize/modern-normalize.css';
+
+or
+
+<link rel="stylesheet" href="node_modules/modern-normalize/modern-normalize.css">
+
+npm install uuid
+======= ===========
+npm run build
+
+add to package.json:
+"homepage": "https://andrii-velhan.github.io/goit-react-hw-04-movies/",
+
+npm run build
+
+npm install --save gh-pages
+
+add to package.json: "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+}
+
+npm run deploy
+=========== =========
+
