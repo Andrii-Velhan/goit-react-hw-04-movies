@@ -1,31 +1,57 @@
-import React, { Component } from 'react';
-import { ToastContainer } from 'react-toastify';
+import React from 'react';
+// import { ToastContainer } from 'react-toastify';
 import './App.css';
-import Searchbar from './components/Searchbar';
-import ImageGallery from './components/ImageGallery';
-// import Button from './components/Button';
+// import Searchbar from './components/Searchbar';
+// import ImageGallery from './components/ImageGallery';
+import { Route, NavLink, Switch } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import MoviesPage from './pages/MoviesPage';
+import MovieDetailsPage from './pages/MovieDetailsPage';
+// import NotFoundPage from './pages/NotFoundPage';
 
-class App extends Component {
-  state = {
-    query: '',
-  };
+const App = () => (
+  <>
+    <ul>
+      <li>
+        <NavLink
+          exact
+          to="/"
+          className="NavLink"
+          activeClassName="NavLink--active"
+        >
+          Home Page
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          exact
+          to="/movies"
+          className="NavLink"
+          activeClassName="NavLink--active"
+        >
+          Movies Page
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          exact
+          to="/movies/:movieId"
+          className="NavLink"
+          activeClassName="NavLink--active"
+        >
+          Movie Details Page
+        </NavLink>
+      </li>
+    </ul>
 
-  handleFormSubmit = query => {
-    this.setState({ query });
-    // console.log('query:', name);
-  };
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/movies" component={MoviesPage} />
+      <Route path="/movies/:movieId" component={MovieDetailsPage} />
 
-  render() {
-    return (
-      <>
-        <Searchbar onSubmit={this.handleFormSubmit} />
-
-        <ImageGallery query={this.state.query} />
-
-        <ToastContainer autoClose={2500} />
-      </>
-    );
-  }
-}
+      <Route component={HomePage} />
+    </Switch>
+  </>
+);
 
 export default App;
