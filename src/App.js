@@ -19,7 +19,7 @@ const App = () => (
           className="NavLink"
           activeClassName="NavLink--active"
         >
-          Home Page
+          Home
         </NavLink>
       </li>
       <li>
@@ -29,7 +29,7 @@ const App = () => (
           className="NavLink"
           activeClassName="NavLink--active"
         >
-          Movies Page
+          Movies search
         </NavLink>
       </li>
       <li>
