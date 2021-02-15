@@ -11,6 +11,7 @@
     "modern-normalize": "^1.0.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
+    "react-axios": "^2.0.4",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
     "react-loader-spinner": "^4.0.0",
