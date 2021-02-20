@@ -40,7 +40,7 @@ export class HomePage extends Component {
           <ul>
             {movies.map(movie => (
               <li key={movie.id}>
-                {/* <Link to={`{this.props.match.url}${movie.id}`}>
+                {/* <Link to={`${this.props.match.url}${movie.id}`}>
                   {movie.title}
                 </Link> */}
                 <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
