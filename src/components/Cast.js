@@ -11,9 +11,10 @@ class Cast extends Component {
   };
 
   async componentDidMount() {
+    console.log('componentDidMount');
     const { movieId } = this.props.match.params;
-    // const { movieId } = Number(this.props.match.params);
-    console.log(movieId);
+    // const { movieId } = Number(this.props.match.params.movieId);
+    console.log('from Cast movieId:', movieId);
     // console.log(this.state.cast);
 
     const response = await Axios.get(
@@ -42,13 +43,20 @@ class Cast extends Component {
     //   });
   }
 
-  // async componentDidUpdate() {
-  //   const { movieId } = Number(this.props.match.params.movieId);
+  // async componentDidUpdate(prevProps, prevState) {
+  //   console.log('componentDidUpdate');
+  //   const { movieId } = this.props.match.params;
   //   console.log(movieId);
+
   //   const response = await Axios.get(
   //     `${themoviedbAPI.BASE_URL}movie/${movieId}/credits?api_key=${themoviedbAPI.MY_KEY}&language=en-US`,
-  //   );
-  //   this.setState({ cast: response.data });
+  //   ).finally(() => {
+  //     window.scrollTo({
+  //       top: document.documentElement.scrollHeight,
+  //       behavior: 'smooth',
+  //     });
+  //   });
+  //   this.setState({ ...response.data });
   //   console.log(this.state.cast);
   // }
 

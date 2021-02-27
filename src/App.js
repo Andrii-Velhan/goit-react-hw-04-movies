@@ -1,56 +1,41 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 // import { ToastContainer } from 'react-toastify';
 import './App.css';
+import routes from './routes';
 // import Searchbar from './components/Searchbar';
 // import ImageGallery from './components/ImageGallery';
-import { Route, NavLink, Switch } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import MoviesPage from './pages/MoviesPage';
-import MovieDetailsPage from './pages/MovieDetailsPage';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Spinner from './components/Spinner/Spinner';
+import AppBar from './components/Appbar';
+// import HomePage from './pages/HomePage';
+// import MoviesPage from './pages/MoviesPage';
+// import MovieDetailsPage from './pages/MovieDetailsPage';
 // import NotFoundPage from './pages/NotFoundPage';
+
+const HomePage = lazy(() =>
+  import('./pages/HomePage.js' /* webpackChunkName: "home-page" */),
+);
+const MovieDetailsPage = lazy(() =>
+  import(
+    './pages/MovieDetailsPage.js' /* webpackChunkName: "home-details-page" */
+  ),
+);
+const MoviesPage = lazy(() =>
+  import('./pages/MoviesPage.js' /* webpackChunkName: "movies-page" */),
+);
 
 const App = () => (
   <>
-    <ul>
-      <li>
-        <NavLink
-          exact
-          to="/"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          exact
-          to="/movies"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Movies search
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          exact
-          to="/movies/:movieId"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Movie Details Page
-        </NavLink>
-      </li>
-    </ul>
+    <AppBar />
 
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/movies/:movieId" component={MovieDetailsPage} />
-      <Route exact path="/movies" component={MoviesPage} />
-
-      <Route component={HomePage} />
-    </Switch>
+    <Suspense fallback={<Spinner />}>
+      <Switch>
+        <Route exact path={routes.home} component={HomePage} />
+        <Route path={routes.movieDetails} component={MovieDetailsPage} />
+        <Route exact path={routes.movies} component={MoviesPage} />
+        <Redirect to={routes.home} />
+      </Switch>
+    </Suspense>
   </>
 );
 
