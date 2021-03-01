@@ -1,0 +1,2 @@
+.CastGallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));grid-gap:14px;padding:0 8px;@media screen and (min-width:720px){grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}.ImageGalleryItem{border-radius:2px;box-shadow:0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.2),0 2px 1px -1px rgba(0,0,0,.2)}
+/*# sourceMappingURL=home-details-page.036821dd.chunk.css.map */
