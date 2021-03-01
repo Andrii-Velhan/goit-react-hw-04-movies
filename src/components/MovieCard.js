@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import './MovieCard.scss';
 import themoviedbAPI from '../services/apiService';
+// import './MovieCard.scss';
 
 const MovieCard = ({ movie }) => {
   const {
@@ -16,7 +16,6 @@ const MovieCard = ({ movie }) => {
 
   return (
     <>
-      <h1>fgfgdfg</h1>
       <div className="Card Container">
         <img
           src={

@@ -23,6 +23,12 @@ export function fetchTrendingMovies() {
   });
 }
 
+function fetchMovieDetails(movieId) {
+  return fetch(
+    `${BASE_URL}movie/${movieId}?api_key=${MY_KEY}&language=en-US`,
+  ).then(res => res.json());
+}
+
 function fetchCast(movieId) {
   return fetch(
     `${BASE_URL}movie/${movieId}/credits?api_key=${MY_KEY}&language=en-US`,
@@ -39,6 +45,7 @@ function fetchReviews(movieId) {
 
 const themoviedbAPI = {
   fetchTrendingMovies,
+  fetchMovieDetails,
   MY_KEY,
   BASE_URL,
   defaultImage,
