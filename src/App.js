@@ -2,14 +2,11 @@ import React, { Suspense, lazy } from 'react';
 // import { ToastContainer } from 'react-toastify';
 import './App.css';
 import routes from './routes';
-// import Searchbar from './components/Searchbar';
-// import ImageGallery from './components/ImageGallery';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Spinner from './components/Spinner/Spinner';
 import AppBar from './components/Appbar';
-// import HomePage from './pages/HomePage';
-// import MoviesPage from './pages/MoviesPage';
-// import MovieDetailsPage from './pages/MovieDetailsPage';
+// import Searchbar from './components/Searchbar';
+// import ImageGallery from './components/ImageGallery';
 // import NotFoundPage from './pages/NotFoundPage';
 
 const HomePage = lazy(() =>
@@ -17,7 +14,7 @@ const HomePage = lazy(() =>
 );
 const MovieDetailsPage = lazy(() =>
   import(
-    './pages/MovieDetailsPage.js' /* webpackChunkName: "home-details-page" */
+    './pages/MovieDetailsPage.js' /* webpackChunkName: "movie-details-page" */
   ),
 );
 const MoviesPage = lazy(() =>

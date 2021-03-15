@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import getQueryParams from '../utils/getQueryParams';
 import SearchBar from '../components/SearchBar';
-// import themoviedbAPI from '../services/apiService';
-import Spinner from '../components/Spinner/Spinner';
 import MovieList from '../components/MovieList';
+import themoviedbAPI from '../services/apiService';
+import Spinner from '../components/Spinner/Spinner';
+import getQueryParams from '../utils/getQueryParams';
 
 class MoviesPage extends Component {
   state = {
@@ -18,7 +18,47 @@ class MoviesPage extends Component {
 
   static defaultProps = {};
 
-  componentWillMount() {}
+  componentDidMount() {
+    const { query } = getQueryParams(this.props.location.search);
+
+    if (query) {
+      this.fetchMovies(query);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { query: prevQuery } = getQueryParams(prevProps.location.search);
+    const { query: nextQuery } = getQueryParams(this.props.location.search);
+
+    if (prevQuery !== nextQuery) {
+      this.fetchMovies(nextQuery);
+    }
+  }
+
+  fetchMovies = query => {
+    this.setState({ loading: true });
+
+    themoviedbAPI
+      .fetchMoviesWithQuery(query)
+      .then(movies => {
+        if (movies.length === 0) {
+          toast.error('Nothing not found');
+        }
+        this.setState({ movies });
+      })
+      .catch(error => {
+        toast.error(error.message);
+        this.setState({ error: error.message });
+      })
+      .finally(() => this.setState({ loading: false }));
+  };
+
+  handleChangeQuery = query => {
+    this.props.history.push({
+      ...this.props.location,
+      search: `query=${query}`,
+    });
+  };
 
   render() {
     const { movies, loading } = this.state;

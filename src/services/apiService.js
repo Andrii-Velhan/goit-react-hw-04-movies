@@ -43,15 +43,24 @@ function fetchReviews(movieId) {
     .then(data => data.results);
 }
 
+function fetchMoviesWithQuery(query) {
+  return fetch(
+    `${BASE_URL}search/movie?api_key=${MY_KEY}&language=en-US&query=${query}&page=1&include_adult=false`,
+  )
+    .then(res => res.json())
+    .then(data => data.results);
+}
+
 const themoviedbAPI = {
   fetchTrendingMovies,
   fetchMovieDetails,
+	fetchCast,
+  fetchReviews,
+	fetchMoviesWithQuery,
   MY_KEY,
   BASE_URL,
   defaultImage,
-  IMG_URL,
-  fetchCast,
-  fetchReviews,
+  IMG_URL,  
 };
 
 export default themoviedbAPI;

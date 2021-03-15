@@ -84,7 +84,7 @@ class MovieDetailsPage extends Component {
                 className="NavLink"
                 activeClassName="NavLink--active"
               >
-                Cast------
+                Cast
               </NavLink>
             </li>
             <li>
@@ -95,7 +95,7 @@ class MovieDetailsPage extends Component {
                 className="NavLink"
                 activeClassName="NavLink--active"
               >
-                Reviews-----
+                Reviews
               </NavLink>
             </li>
           </ul>
