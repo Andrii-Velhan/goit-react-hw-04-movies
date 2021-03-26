@@ -35,6 +35,13 @@ class MoviesPage extends Component {
     }
   }
 
+  handleChangeQuery = query => {
+    this.props.history.push({
+      ...this.props.location,
+      search: `query=${query}`,
+    });
+  };
+
   fetchMovies = query => {
     this.setState({ loading: true });
 
@@ -51,13 +58,6 @@ class MoviesPage extends Component {
         this.setState({ error: error.message });
       })
       .finally(() => this.setState({ loading: false }));
-  };
-
-  handleChangeQuery = query => {
-    this.props.history.push({
-      ...this.props.location,
-      search: `query=${query}`,
-    });
   };
 
   render() {

@@ -8,59 +8,59 @@ const defaultImage = `${IMG_URL}wwemzKWzjKYJFfCeiB57q3r4Bcm.png`;
 // https://api.themoviedb.org/3/trending/all/day?api_key=<<api_key>>
 // ?_embed=credits
 export function fetchTrendingMovies() {
-  const url = `${BASE_URL}trending/all/day?api_key=${MY_KEY}`;
-  // const url = `${BASE_URL}/?q=${query}&page=${page}&key=${MY_KEY}&image_type_type=photo&orientation=horizontal&per_page=${PER_PAGE}`;
-  return fetch(url).then(response => {
-    if (response.ok) {
-      return response
-        .json()
-        .then(data => data.results)
-        .then(results =>
-          results.filter(movieArray => movieArray.media_type === 'movie'),
-        );
-    }
-    return Promise.reject(new Error('Trending movies not found!'));
-  });
+	const url = `${BASE_URL}trending/all/day?api_key=${MY_KEY}`;
+	// const url = `${BASE_URL}/?q=${query}&page=${page}&key=${MY_KEY}&image_type_type=photo&orientation=horizontal&per_page=${PER_PAGE}`;
+	return fetch(url).then(response => {
+		if (response.ok) {
+			return response
+				.json()
+				.then(data => data.results)
+				.then(results =>
+					results.filter(movieArray => movieArray.media_type === 'movie'),
+				);
+		}
+		return Promise.reject(new Error('Trending movies not found!'));
+	});
 }
 
 function fetchMovieDetails(movieId) {
-  return fetch(
-    `${BASE_URL}movie/${movieId}?api_key=${MY_KEY}&language=en-US`,
-  ).then(res => res.json());
+	return fetch(
+		`${BASE_URL}movie/${movieId}?api_key=${MY_KEY}&language=en-US`,
+	).then(res => res.json());
 }
 
 function fetchCast(movieId) {
-  return fetch(
-    `${BASE_URL}movie/${movieId}/credits?api_key=${MY_KEY}&language=en-US`,
-  ).then(res => res.json());
+	return fetch(
+		`${BASE_URL}movie/${movieId}/credits?api_key=${MY_KEY}&language=en-US`,
+	).then(res => res.json());
 }
 
 function fetchReviews(movieId) {
-  return fetch(
-    `${BASE_URL}movie/${movieId}/reviews?api_key=${MY_KEY}&language=en-US&page=1`,
-  )
-    .then(res => res.json())
-    .then(data => data.results);
+	return fetch(
+		`${BASE_URL}movie/${movieId}/reviews?api_key=${MY_KEY}&language=en-US&page=1`,
+	)
+		.then(res => res.json())
+		.then(data => data.results);
 }
 
 function fetchMoviesWithQuery(query) {
-  return fetch(
-    `${BASE_URL}search/movie?api_key=${MY_KEY}&language=en-US&query=${query}&page=1&include_adult=false`,
-  )
-    .then(res => res.json())
-    .then(data => data.results);
+	return fetch(
+		`${BASE_URL}search/movie?api_key=${MY_KEY}&language=en-US&query=${query}&page=1&include_adult=false`,
+	)
+		.then(res => res.json())
+		.then(data => data.results);
 }
 
 const themoviedbAPI = {
-  fetchTrendingMovies,
-  fetchMovieDetails,
+	fetchTrendingMovies,
+	fetchMovieDetails,
 	fetchCast,
-  fetchReviews,
+	fetchReviews,
 	fetchMoviesWithQuery,
-  MY_KEY,
-  BASE_URL,
-  defaultImage,
-  IMG_URL,  
+	MY_KEY,
+	BASE_URL,
+	defaultImage,
+	IMG_URL,
 };
 
 export default themoviedbAPI;

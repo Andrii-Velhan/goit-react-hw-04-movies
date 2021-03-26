@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import themoviedbAPI from '../services/apiService';
 import { toast } from 'react-toastify';
+import Layout from '../components/Layout';
 
-export default class MovieReview extends Component {
+export default class Reviews extends Component {
   state = {
     reviews: [],
     error: null,
@@ -31,9 +32,8 @@ export default class MovieReview extends Component {
 
     return (
       <>
-        <h1>uyguguy</h1>
         <ul>
-          {reviews.length !== 0 ? (
+          {reviews.length > 0 ? (
             reviews.map(({ id, author, content }) => (
               <li key={id}>
                 <h2>{author}</h2>
