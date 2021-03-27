@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import themoviedbAPI from '../services/apiService';
+import themoviedbAPI from '../../services/apiService';
 import Axios from 'axios';
 import './Cast.css';
 // import { toast } from 'react-toastify';
@@ -77,8 +77,8 @@ class Cast extends Component {
                   }
                   alt={name}
                 />
-                <p>{name}</p>
-                <p>Character: {character}</p>
+                <div className="CastGallery__info-container"><p>{name}</p>
+                <p>Character: {character}</p></div>
               </li>
             ))
           ) : (

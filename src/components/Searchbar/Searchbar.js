@@ -1,71 +1,126 @@
 import React, { Component } from 'react';
-// import { ImSearch } from 'react-icons/im';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import './SearchBar.css';
 import PropTypes from 'prop-types';
-// import { v4 as uuidv4 } from 'uuid';
-import './Searchbar.css';
 
-class Searchbar extends Component {
-  state = {
-    name: '',
-    // number: '',
-  };
+export default class Searchbar extends Component {
+	static propTypes = {
+		onSubmit: PropTypes.func,
+	};
 
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  };
+	state = {
+		value: '',
+	};
 
-  static defaultProps = {};
+	handleChange = event => {
+		this.setState({ value: event.currentTarget.value.toLowerCase() });
+	};
 
-  handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-    // this.setState({ name: event.currentTarget.value.toLoverCace() });
-  };
+	handleSubmit = event => {
+		event.preventDefault();
+		const { value } = this.state;
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const { name } = this.state;
+		if (value.trim() === '') {
+			toast('Input data !!!');
+			return;
+		}
 
-    // console.log(name);
+		this.props.onSubmit(value);
+		this.setState({ value: '' });
+	};
 
-    if (name.trim() === '') {
-      toast.error('Enter data !!!');
-      // alert('Enter data !!!');
-    } else {
-      this.props.onSubmit(name);
-
-      this.setState({ name: '' });
-    }
-  };
-
-  render() {
-    // const { name } = this.state;
-    return (
-      <>
-        <header className="Searchbar">
-          <form className="SearchForm" onSubmit={this.handleSubmit}>
-            <button type="submit" className="SearchForm-button">
-              {/* <ImSearch style={{ marginRight: 8 }} /> */}
-              <span className="SearchForm-button-label">Search</span>
-            </button>
-
-            <input
-              className="SearchForm-input"
-              type="text"
-              name="name"
-              autoComplete="off"
-              autoFocus
-              placeholder="Search images and photos"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </form>
-        </header>
-      </>
-    );
-  }
+	render() {
+		const { value } = this.state;
+		return (
+			<div className="Searchbar">
+				<form onSubmit={this.handleSubmit} className="SearchForm">
+					<input
+						className="SearchForm--input"
+						type="text"
+						name="query"
+						value={value}
+						onChange={this.handleChange}
+						autoComplete="off"
+						autoFocus
+					/>
+					<button type="submit" className="SearchForm--button Button">
+						Search
+          </button>
+				</form>
+			</div>
+		);
+	}
 }
 
-export default Searchbar;
+
+// import React, { Component } from 'react';
+// // import { ImSearch } from 'react-icons/im';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import PropTypes from 'prop-types';
+// // import { v4 as uuidv4 } from 'uuid';
+// import './Searchbar.css';
+
+// class Searchbar extends Component {
+//   state = {
+//     name: '',
+//     // number: '',
+//   };
+
+//   static propTypes = {
+//     onSubmit: PropTypes.func.isRequired,
+//   };
+
+//   static defaultProps = {};
+
+//   handleChange = event => {
+//     const { name, value } = event.target;
+//     this.setState({ [name]: value });
+//     // this.setState({ name: event.currentTarget.value.toLoverCace() });
+//   };
+
+//   handleSubmit = event => {
+//     event.preventDefault();
+//     const { name } = this.state;
+
+//     // console.log(name);
+
+//     if (name.trim() === '') {
+//       toast.error('Enter data !!!');
+//       // alert('Enter data !!!');
+//     } else {
+//       this.props.onSubmit(name);
+
+//       this.setState({ name: '' });
+//     }
+//   };
+
+//   render() {
+//     // const { name } = this.state;
+//     return (
+//       <>
+//         <header className="Searchbar">
+//           <form className="SearchForm" onSubmit={this.handleSubmit}>
+//             <button type="submit" className="SearchForm-button">
+//               {/* <ImSearch style={{ marginRight: 8 }} /> */}
+//               <span className="SearchForm-button-label">Search</span>
+//             </button>
+
+//             <input
+//               className="SearchForm-input"
+//               type="text"
+//               name="name"
+//               autoComplete="off"
+//               autoFocus
+//               placeholder="Search images and photos"
+//               value={this.state.name}
+//               onChange={this.handleChange}
+//             />
+//           </form>
+//         </header>
+//       </>
+//     );
+//   }
+// }
+
+// export default Searchbar;

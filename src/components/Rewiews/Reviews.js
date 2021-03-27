@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import themoviedbAPI from '../services/apiService';
+import themoviedbAPI from '../../services/apiService';
 import { toast } from 'react-toastify';
-import Layout from '../components/Layout';
+import Layout from '../../components/Layout';
 
 export default class Reviews extends Component {
   state = {

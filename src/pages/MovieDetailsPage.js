@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Switch } from 'react-router-dom';
-import Cast from '../components/Cast';
-import Reviews from '../components/Reviews';
-import MovieCard from '../components/MovieCard';
+import Cast from '../components/Cast/Cast';
+import Reviews from '../components/Rewiews';
+import MovieCard from '../components/MovieCard/MovieCard';
 import themoviedbAPI from '../services/apiService';
-// import Axios from 'axios';
 import routes from '../routes';
-// import Spinner from '../components/Spinner/Spinner';
 import { toast } from 'react-toastify';
-
+// import Axios from 'axios';
+import Spinner from '../components/Spinner';
 class MovieDetailsPage extends Component {
 	state = {
 		movie: null,
@@ -18,7 +17,6 @@ class MovieDetailsPage extends Component {
 
 	async componentDidMount() {
 		this.setState({ loading: true });
-		// console.log(Number(this.props.match.params.movieId));
 
 		const { movieId } = this.props.match.params;
 		// const response = await Axios.get(
@@ -32,74 +30,80 @@ class MovieDetailsPage extends Component {
 				this.setState({ error: error.message });
 			})
 			.finally(() => this.setState({ loading: false }));
-		// console.log(this.state);
 	}
 
 	handleGoBack = () => {
-		console.log('back!');
+		// console.log('back!');
 		const { location, history } = this.props;
 		history.push(location?.state?.from || routes.movies);
 	};
 
 	render() {
-		const {
-			movie,
-			loading,
-		} = this.state;
+		const { movie, loading } = this.state;
 
 		return (
 			<>
-				<button
-					type="button"
-					className="BackButton Button"
-					onClick={this.handleGoBack}
-				>
-					Back
-        </button>
+				{loading ? (
+					<Spinner />
+				) : (
+					<div className='Container'>
+						<div>
+							<button
+								type="button"
+								className="BackButton Button"
+								onClick={this.handleGoBack}
+							>
+								Back
+						</button>
 
-				{this.state.movie && <MovieCard movie={movie} />}
+							{this.state.movie && <MovieCard movie={movie} />}
+						</div>
 
-				<ul className="NavList">
-					<li className="NavLink-item">
-						<NavLink
-							exact
-							to={`${this.props.match.url}/cast`}
-							className="NavLink"
-							activeClassName="NavLink--active"
-						>
-							Cast
+						<ul className="NavList">
+							<li className="NavList--item">
+								<NavLink
+									exact
+									to={`${this.props.match.url}/cast`}
+									className="NavLink"
+									activeClassName="NavLink--active"
+								>
+									Cast
             </NavLink>
-					</li>
-					<li className="NavLink-item">
-						<NavLink
-							exact
-							// to="/movies/:movieId/reviews"
-							to={`${this.props.match.url}/reviews`}
-							className="NavLink"
-							activeClassName="NavLink--active"
-						>
-							Reviews
+							</li>
+							<li className="NavList--item">
+								<NavLink
+									exact
+									// to="/movies/:movieId/reviews"
+									to={`${this.props.match.url}/reviews`}
+									className="NavLink"
+									activeClassName="NavLink--active"
+								>
+									Reviews
             </NavLink>
-					</li>
-				</ul>
+							</li>
+						</ul>
 
-				<Switch>
-					{/* <Route path="/movies/:movieId/cast" component={Cast} /> */}
-					<Route
-						path={`${this.props.match.path}/cast`}
-						render={props => {
-							console.log(props);
-							const movieId = Number(props.match.params.movieId);
-							console.log(movieId);
-							return <Cast {...props} movieId={movieId} />;
-						}}
-					/>
-					{/* <Route path="/movies/:movieId/reviews" component={Reviews} /> */}
-					<Route
-						path={`${this.props.match.path}/reviews`}
-						component={Reviews}
-					/>
-				</Switch>
+						<Switch>
+							{/* <Route path="/movies/:movieId/cast" component={Cast} /> */}
+							<Route
+								path={`${this.props.match.path}/cast`}
+								render={props => {
+									console.log(props);
+									const movieId = Number(props.match.params.movieId);
+									console.log(movieId);
+									return <Cast {...props} movieId={movieId} />;
+								}}
+							/>
+							{/* <Route path="/movies/:movieId/reviews" component={Reviews} /> */}
+							<Route
+								path={`${this.props.match.path}/reviews`}
+								component={Reviews}
+							/>
+						</Switch>
+
+					</div>
+				)
+				}
 			</>
 		);
 	}
