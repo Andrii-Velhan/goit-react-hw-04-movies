@@ -11,10 +11,10 @@ class Cast extends Component {
   };
 
   async componentDidMount() {
-    console.log('componentDidMount');
+    // console.log('componentDidMount');
     const { movieId } = this.props.match.params;
     // const { movieId } = Number(this.props.match.params.movieId);
-    console.log('from Cast movieId:', movieId);
+    // console.log('from Cast movieId:', movieId);
     // console.log(this.state.cast);
 
     const response = await Axios.get(
@@ -26,7 +26,7 @@ class Cast extends Component {
       });
     });
     this.setState({ ...response.data });
-    console.log(this.state.cast);
+    // console.log(this.state.cast);
     //==============
     // themoviedbAPI
     //   .fetchCast(movieId)
